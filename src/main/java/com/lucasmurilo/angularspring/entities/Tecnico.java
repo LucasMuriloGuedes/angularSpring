@@ -1,6 +1,7 @@
 package com.lucasmurilo.angularspring.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucasmurilo.angularspring.domain.enums.Perfil;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Tecnico extends Pessoa implements Serializable {
 
     @OneToMany(mappedBy = "tecnico")
+    @JsonIgnore
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {
