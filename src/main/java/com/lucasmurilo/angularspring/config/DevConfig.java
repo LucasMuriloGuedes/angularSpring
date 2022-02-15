@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("test")
-public class TestConfig implements CommandLineRunner {
+@Profile("dev")
+public class DevConfig implements CommandLineRunner {
 
     @Autowired
     private ChamadoRepository chamadoRepository;
