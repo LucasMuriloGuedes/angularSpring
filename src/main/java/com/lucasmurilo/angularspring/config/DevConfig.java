@@ -30,21 +30,6 @@ public class DevConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Tecnico tecnico1 = new Tecnico(null, "Lucas Murilo", "02308639148", "lucasmurilo.guedes@gmail.com", "123456");
-        tecnico1.setPerfil(Perfil.ADMIN);
-
-        Cliente cli1 = new Cliente(null, "Abel Ferreira", "1234564541", "abelferreira@palmeiras.com.br", "14455444");
-
-        Chamado chamado1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 01", "PrimeiroChamado", tecnico1, cli1);
-
-        tecnico1.getChamados().add(chamado1);
-
-        cli1.getChamados().add(chamado1);
-
-        tecnicoRepository.save(tecnico1);
-        clienteRepository.save(cli1);
-        chamadoRepository.save(chamado1);
-
 
     }
 }
