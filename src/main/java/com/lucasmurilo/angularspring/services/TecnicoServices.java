@@ -22,12 +22,12 @@ public class TecnicoServices {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public Tecnico findById(Integer id){
+    public Tecnico findById(Integer id) {
         Optional<Tecnico> obj = tecnicoRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
     }
 
-    public List<Tecnico> findAll(){
+    public List<Tecnico> findAll() {
         List<Tecnico> list = tecnicoRepository.findAll();
         return list;
     }
@@ -39,17 +39,27 @@ public class TecnicoServices {
         return tecnicoRepository.save(newObj);
     }
 
+    public Tecnico update(Integer id, TecnicoDTO tecnicoDTO) {
+        tecnicoDTO.setId(id);
+        Tecnico oldObj = findById(id);
+        validaPorCpfEEmail(tecnicoDTO);
+        oldObj = new Tecnico(tecnicoDTO);
+        return tecnicoRepository.save(oldObj);
+    }
+
     private void validaPorCpfEEmail(TecnicoDTO tecnicoDTO) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(tecnicoDTO.getCpf());
-        if(obj.isPresent() && obj.get().getId() != tecnicoDTO.getId()){
+        if (obj.isPresent() && obj.get().getId() != tecnicoDTO.getId()) {
             throw new DataIntegrityViolationException("Cpf já cadastrado no sistema");
         }
 
         obj = pessoaRepository.findByEmail(tecnicoDTO.getEmail());
 
-        if(obj.isPresent() && obj.get().getId() != tecnicoDTO.getId()){
+        if (obj.isPresent() && obj.get().getId() != tecnicoDTO.getId()) {
             throw new DataIntegrityViolationException("Email já cadastrado no sistema");
         }
 
     }
 }
+
+
