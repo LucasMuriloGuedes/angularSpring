@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -43,6 +42,11 @@ public class TecnicoResource {
     public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDTO tecnicoDTO){
         Tecnico obj = tecnicoServices.update(id, tecnicoDTO);
         return ResponseEntity.ok().body(new TecnicoDTO(obj));
+    }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        tecnicoServices.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

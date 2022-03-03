@@ -60,6 +60,14 @@ public class TecnicoServices {
         }
 
     }
+
+    public void delete(Integer id) {
+        Tecnico obj = findById(id);
+        if(obj.getChamados().size() > 0){
+            throw new DataIntegrityViolationException("O técnico possui ordem de servico e não pode ser deletado");
+        }
+        tecnicoRepository.deleteById(id);
+    }
 }
 
 
