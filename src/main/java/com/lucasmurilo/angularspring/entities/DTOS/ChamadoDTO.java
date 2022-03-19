@@ -3,6 +3,7 @@ package com.lucasmurilo.angularspring.entities.DTOS;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucasmurilo.angularspring.entities.Chamado;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,11 +14,17 @@ public class ChamadoDTO implements Serializable {
     private LocalDate dataAbertura = LocalDate.now();
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFechamento;
+    @NotNull(message = "O campo Prioridade é requerido!")
     private Integer prioridade;
+    @NotNull(message = "O campo Status é requerido!")
     private Integer status;
+    @NotNull(message = "O campo Titulo é requerido!")
     private String titulo;
+    @NotNull(message = "O campo Observações é requerido!")
     private String observacoes;
+    @NotNull(message = "O campo Tecnico é requerido!")
     private Integer tecnico;
+    @NotNull(message = "O campo Cliente é requerido!")
     private Integer cliente;
     private String nomeTecnico;
     private String nomeCliente;
